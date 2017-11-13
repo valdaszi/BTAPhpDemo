@@ -1,0 +1,11 @@
+body { font-size: 30px; }
+
+p { color: brown; }
+
+section p { color: red; }
+
+section + section + section > p  { color: blue; }
+
+h1 + section p { color: yellow; }
+
+section > p:nth-child(1) { color: green; }

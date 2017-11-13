@@ -1,0 +1,14 @@
+[
+  {
+    "autorius": "Jules Gabriel Verne",   
+    "pavadinimas": { "kalba": "lt", "tekstas": "Aplink pasaulį per 80 dienų" },    
+    "metai": 1873,
+	  "orginalas": { "kalba": "fr", "tekstas": "Le Tour du Monde en quatre-vingts jours" }  
+  },
+  {
+    "autorius": "Jules Gabriel Verne",   
+    "pavadinimas": { "kalba": "lt", "tekstas": "20000 mylių po vandeniu" },    
+    "metai": 1869,
+	  "orginalas": { "kalba": "fr", "tekstas": "Vingt mille lieues sous les mers" }  
+  }
+]

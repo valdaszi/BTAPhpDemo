@@ -1,0 +1,18 @@
+body { font-size: 30px; }
+
+p { 
+    color: black; 
+    background-color: yellow;
+    margin: 5px;
+    border-color: blue;
+    border-width: 5px;
+    border-style: solid;
+    padding: 10px;
+}
+
+section { 
+    background-color: green;
+    padding: 20px;
+    margin: 10px;
+}
+

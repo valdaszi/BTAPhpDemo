@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Selektoriai</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        section + section {
+            background-color: red;
+        }
+        div {
+            background-color: lightblue;
+        }
+        section > div {
+            background-color: greenyellow;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Selektoriai</h1>
+    <section>
+        <p>Kažkoks tekstas 1</p>
+        <p>Kažkoks tekstas 2</p>
+    </section>
+    <section>
+        <p>Kažkoks tekstas 10</p>
+        <div>Kažkoks tekstas 11
+            <div>Kažkoks tekstas 11-1</div>
+        </div>
+    </section>
+    <section>
+        <p>Kažkoks tekstas 20</p>
+        <p>Kažkoks tekstas 21</p>
+    </section>
+    <section>
+        <p>Kažkoks tekstas 30</p>
+        <p>Kažkoks tekstas 31</p>
+    </section>
+    <p>Kažkoks tekstas</p>
+ </body>
+</html>

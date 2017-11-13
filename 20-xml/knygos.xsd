@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="knygos">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="knyga" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="knyga">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="autorius" minOccurs="1"/>
+      <xs:element ref="pavadinimas" minOccurs="1"/>
+      <xs:element ref="metai" minOccurs="1"/>
+      <xs:element ref="orginalas"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="autorius" type="xs:string"/>
+<xs:element name="metai" type="xs:decimal"/>
+<xs:element name="pavadinimas" type="PavadinimasType"/>
+<xs:element name="orginalas" type="PavadinimasType"/>
+
+<xs:complexType name="PavadinimasType">
+  <xs:simpleContent>
+    <xs:extension base="xs:string">
+      <xs:attribute name="kalba" type="xs:string" use="required"/>
+    </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
+
+</xs:schema>
