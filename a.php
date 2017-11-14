@@ -1,7 +1,7 @@
 <!Doctype html>
 <html>
 <head>
-<title>Baranch: demo1 - Užduotis Nr.1 ir Nr.2</title>
+<title>Branch: demo1 - Užduotis Nr.1 ir Nr.2</title>
 <style>
     .pirmas { 
         background-color: #0b530e;
