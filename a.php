@@ -1,12 +1,16 @@
 <!Doctype html>
 <html>
 <head>
-<title>Užduotis Nr.1 ir Nr.2</title>
+<title>Baranch: demo1 - Užduotis Nr.1 ir Nr.2</title>
 <style>
-    .pirmas { background-color: #0b530e;
-              color: #ffffff; } 
-    .pirmas ~ tr { background-color: lightgreen;
-                     color: grey;}
+    .pirmas { 
+        background-color: #0b530e;
+        color: #ffffff; 
+    } 
+    .pirmas ~ tr { 
+        background-color: lightgreen;
+        color: grey;
+    }
 </style>
 </head>
 <body>
