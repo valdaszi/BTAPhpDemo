@@ -1,7 +1,7 @@
 <!Doctype html>
 <html>
 <head>
-<title>uzduotis nr.1 ir nr.2</title>
+<title>Užduotis Nr.1 ir Nr.2</title>
 <style>
     .pirmas { background-color: #0b530e;
               color: #ffffff; } 
