@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Demo</title>
+        <title>Demo 06</title>
     </head>
     <body>
         <?php
