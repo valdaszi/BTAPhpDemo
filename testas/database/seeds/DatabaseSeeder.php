@@ -12,52 +12,49 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        App\User::create([
-            'name' => 'Adminas Jonas',
-            'email' => 'admin@firma.lt',
-            'password' => bcrypt('123456')
-        ]);
-        App\User::create([
-            'name' => 'Ona Petrona',
-            'email' => 'ona@firma.lt',
-            'password' => bcrypt('111111')
-        ]);
-
         // $this->call(UsersTableSeeder::class);
-        App\Driver::create([
+
+        
+        \App\Radar::create([
+            'date' => Carbon::create(2017, 1, 1, 23, 25, 50),
+            'number' => 'AAA001',
+            'distance' => 1000,
+            'time' => 21
+        ]);
+        \App\Radar::create([
+            'date' => Carbon::create(2017, 1, 2, 0, 1, 59),
+            'number' => 'ABC222',
+            'distance' => 1000,
+            'time' => 20
+        ]);
+        \App\Radar::create([
+            'date' => Carbon::create(2017, 1, 2, 0, 3, 59),
+            'number' => 'ABB222',
+            'distance' => 1000,
+            'time' => 19
+        ]);
+
+        \App\Driver::create([
             'name' => 'Jonas',
-            'surname' => 'Jonaitis',
-            'city' => 'Babtai',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-            'creator_id' => 1, 
-            'updater_id' => 1
+            'city' => 'Babtai'
         ]);
-        App\Driver::create([
+        \App\Driver::create([
             'name' => 'Ona',
-            'surname' => 'Onė',
-            'city' => 'Raudondvaris',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-            'creator_id' => 2, 
-            'updater_id' => 2
+            'city' => 'Kaunas'
         ]);
-        App\Driver::create([
+        \App\Driver::create([
             'name' => 'Petras',
-            'surname' => 'Petraitis',
-            'city' => 'Palanga',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-            'creator_id' => 2, 
-            'updater_id' => 1
+            'city' => 'Palanga'
         ]);
 
 
-        // rand(min, max)       
         $radarsDistance = [5000, 4500, 5100];
-
+        
         $raide = 'ABCDEFGHIJKLMNOPRSTUVZ';
         $sk = strlen($raide) - 1;
+
+        $timeFrom = Carbon::create(2017, 1, 1, 0, 0, 0)->timestamp;
+        $timeTo = Carbon::now()->timestamp;
 
         for ($i = 0; $i < 1000; $i++) {
             
@@ -65,33 +62,18 @@ class DatabaseSeeder extends Seeder
             $speed = rand(120, 190);
             $time = round($distance / ($speed / 3.6));  
 
-            // https://www.unixtimestamp.com/index.php
-            // 01/01/2017 - 10/23/2017 @ 1:14pm (UTC)
-            $timestamp = rand(1483228800, 1508764460);
+            $timestamp = rand($timeFrom, $timeTo);
 
             $number = $raide[rand(0, $sk)] . $raide[rand(0, $sk)] . $raide[rand(0, $sk)] .
                 rand(0, 9) . rand(0, 9) . rand(0, 9);
 
-            if (rand(0, 10) == 0) {
-                $driverId = rand(1, 3);
-            } else {
-                $driverId = null;
-            }
-
-
-            App\Radar::create([
-                'date' => Carbon::createFromTimestamp($timestamp),
-                'number' => $number,
-                'distance' => $distance,
-                'time' => $time,
-                'driver_id' => $driverId,
-                
-                'created_at' => Carbon::createFromTimestamp($timestamp),
-                'updated_at' => Carbon::createFromTimestamp($timestamp),
-
-                'creator_id' => rand(1, 2),
-                'updater_id' => rand(1, 2)
-            ]);
+            $radar = new \App\Radar();
+            $radar->date = Carbon::createFromTimestamp($timestamp);
+            $radar->number = $number;
+            $radar->distance = $distance;
+            $radar->time = $time;
+            
+            $radar->save();
         }
     }
 }

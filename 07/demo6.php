@@ -15,11 +15,17 @@
         ?>
         <hr>
         <?php
-            $a = array('A' => array(1), 'B' => array(3, 4), 'C' => array(6, 5));
+            $a = [
+                'A' => [1, 'as' => 10, -10 => 9], 
+                'B' => [3, 4], 
+                'C' => [6, 9 => 4]];
             $suma = 0;
             foreach ($a as $key => $value) {
                 if ($key != 'B') {
-                    $suma += $value[0];
+                    //$suma += $value[0];
+                    foreach ($value as $elem) {
+                        $suma += $elem;
+                    }
                 }
             }
             var_dump($a);

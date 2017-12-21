@@ -13,5 +13,8 @@
             echo $a['Petras'].'<br>'; 
             echo $a['Maytė'][2].'<br>';
         ?>
+        <pre>
+            <?php var_dump($a); ?>
+        </pre>
     </body>
 </html>

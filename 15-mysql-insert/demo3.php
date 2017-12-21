@@ -13,9 +13,9 @@ require_once 'lentele.php';
 $conn = connectDB();
 lentele($conn);
 
-$id = 41;
+$id = 7;
 $kelias = 4900;
-$laikas = 99;
+$laikas = 100;
 
 $sql = "UPDATE radars SET distance = ?, `time` = ? WHERE id = ?"; 
 $stmt = $conn->prepare($sql);

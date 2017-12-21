@@ -20,7 +20,12 @@ if ($conn->connect_error) {
     die('Nepavyko prisjungti: ' . $conn->connect_error);
 }
 
-$insert = "INSERT INTO radars(date, number, distance, time) VALUES('2017-07-18 15:07:30', '666', 5000, 144)"; 
+$data = '2017-07-18 15:07:30';
+$numeris = 'A666';
+$kelias = 5000;
+$laikas = 144;
+
+$insert = "INSERT INTO radars(date, number, distance, time) VALUES('$data', '$numeris', $kelias, $laikas)"; 
 
 if (!$conn->query($insert)) {
      echo "Klaida: ". $conn->error;

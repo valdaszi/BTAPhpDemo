@@ -1,40 +1,23 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
-
-    <h1>Vairuotojai</h1>
-    
-    <table class="table">
-        <tr>
-            <th>Vardas</th>
-            <th>Pavardė</th>
-            <th>Miestas</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <?php foreach ($drivers as $d): ?>
+        <h1>Drivers</h1>
+        <table>
             <tr>
-                <td><a href="drivers/{{ $d->id }}">{{ $d->name }}</a></td>
-                <td>{{ $d->surname }}</td>
-                <td>{{ $d->city }}</td>
-                <td><a class="btn btn-primary" href="drivers/{{ $d->id }}/edit">{{ __('buttons.edit') }}</a></td>
-                <td> 
-                    <form method="post" action="{{ url('/drivers', $d->id) }}">
-                        {{ method_field('DELETE') }} 
-                        {{ csrf_field() }}
-                        <button class="btn btn-danger">{{ __('buttons.delete') }}</button> 
-                    </form>
-                </td>
+                <th>Vardas</th><th>Miestas</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
 
-    {{ $drivers->links() }}
+        @foreach($drivers as $driver)
+            <tr>
+                <td><a href="{{ url('drivers', $driver->id) }}">{{$driver->name}}</a></td>
+                <td>{{$driver->city}}</td>
+            </tr>
+        @endforeach
+        
+        </table>
+            
+        <br>
+        
+        <a href={{ url('drivers/create') }}>Naujas</a>
 
-@endsection
-
-@section('menu')
-    <li><a href="drivers/create">Naujas vairuotojas</a></li>
-    <li><a href="radars">Radarų įrašai</a></li>
-    <li><a href="drivers">Vairuotojai</a></li>
 @endsection

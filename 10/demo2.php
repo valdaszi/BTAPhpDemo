@@ -11,6 +11,8 @@
             
             echo '<hr>';
 
+            //echo "${a}1";
+
             $a = 'Labas rytas';
             $$a = 'vakaras';
             echo ${'Labas' . ' ' . 'rytas'};

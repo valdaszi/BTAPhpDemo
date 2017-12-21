@@ -26,11 +26,18 @@ $kelias = 5000;
 $laikas = 99;
 
 $insert = "INSERT INTO radars(`date`, `number`, `distance`, `time`) VALUES(?, ?, ?, ?)"; 
-$stmt = $conn->prepare($insert);
+if (!($stmt = $conn->prepare($insert))) {
+    die("Error: " . $conn->error);
+}
 
-$stmt->bind_param("ssdd", $data, $numeris, $kelias, $laikas);
+if (!$stmt->bind_param("ssdd", $data, $numeris, $kelias, $laikas)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
 
-$stmt->execute();
+//TODO!!!
+if (!$stmt->execute()) {
+    echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;    
+}
 
 // išvedame automobilius
 $sql = "SELECT `number`, `distance`/`time`*3.6 as `speed`, `date` FROM radars WHERE `date` > '2017-03-01 09:15:24' ORDER BY `number`, `date` DESC";

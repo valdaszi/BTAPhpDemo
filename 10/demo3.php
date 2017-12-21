@@ -5,10 +5,11 @@
     </head>
     <body>
         <?php
-            $a = array(
-                array(vardas => 'Jonas', ugis => 2.0),
-                array(vardas => 'Petras', ugis => 1.75),
-                array(vardas => 'Antanas', ugis => 1.8));
+            $a = [
+                [vardas => 'Jonas', ugis => 2.0],
+                [vardas => 'Petras', ugis => 1.75],
+                [vardas => 'Antanas', ugis => 1.8]
+            ];
             
             var_dump($a);
 
@@ -47,22 +48,17 @@
             //     else return 1;
             // }
             // function lyginimas($p1, $p2) {
-            //     return $p1['ugis'] == $p2['ugis'] ? 0 :
-            //         $p1['ugis'] < $p2['ugis'] ? -1 : 1; 
+                // return $p1['ugis'] == $p2['ugis'] ? 0 :
+                //     $p1['ugis'] < $p2['ugis'] ? -1 : 1; 
             // }
             // usort($a, lyginimas);
             // var_dump($a);
 
-            // usort($a, function($p1, $p2) {
-            //     if ($p1['ugis'] == $p2['ugis']) {
-            //         return 0;
-            //     } elseif ($p1['ugis'] < $p2['ugis']) {
-            //         return -1;
-            //     } else {
-            //         return 1;
-            //     }
-            // });
-            // var_dump($a);
+            usort($a, function($p1, $p2) {
+                return $p1['ugis'] == $p2['ugis'] ? 0 :
+                   $p1['ugis'] < $p2['ugis'] ? -1 : 1;
+            });
+            var_dump($a);
         ?>
     </body>
 </html>

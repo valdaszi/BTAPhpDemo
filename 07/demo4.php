@@ -4,6 +4,7 @@
         <title>Demo</title>
     </head>
     <body>
+        <pre>
         <?php
             $a = array(
                 1, 
@@ -19,7 +20,8 @@
                 'aš' => 2048, 
                 -10 => 1000,
                 2 => 16,
-                13
+                13,
+                0 => 99
                 );
 
             var_dump($a);
@@ -28,5 +30,6 @@
             //unset($a[0]);
             //var_dump($a);
         ?>
+        </pre>
     </body>
 </html>

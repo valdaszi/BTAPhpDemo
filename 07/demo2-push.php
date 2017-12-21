@@ -5,6 +5,7 @@
     </head>
     <body>
         <h1>array_push</h1>
+        <pre>
         <?php
             $a = array('Palanga');
             var_dump($a);
@@ -19,6 +20,6 @@
             array_push($a, 'Babtai', 'Suvalkai');
             var_dump($a);
         ?>
-
+        </pre>
     </body>
 </html>

@@ -5,7 +5,7 @@
     </head>
     <body>
         <?php
-            $a = array(10, 12, array('Jonas', 'Petras', true), 'Palanga');
+            $a = [10, 12, ['Jonas', 'Petras', true], 'Palanga'];
             if ($a[0] < 20) {
                 echo "A";
             } else {
@@ -14,7 +14,9 @@
             echo '<pre>';
             print_r($a);
             echo '</pre>';
+            echo '<pre>';
             var_dump($a);
+            echo '</pre>';
         ?>
     </body>
 </html>

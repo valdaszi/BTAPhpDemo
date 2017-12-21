@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
+        <h1>Driver</h1>
 
-    <h1>Duomenys apie vairuotoją įrašą Nr {{ $driver->id }} </h1>
-    
-    <div>Vardas: {{ $driver->name }}</div>
-    <div>Pavardė: {{ $driver->surname }}</div>
-    <div>Miestas: {{ $driver->city }}</div>
+        <div>id: {{$driver->id}}</div>
+        <div>Name: {{$driver->name}}</div>
+        <div>City: {{$driver->city}}</div>
+        
+        <br>
 
+        <a href="{{ url('drivers') }}">Sąrašas</a>
 @endsection

@@ -8,23 +8,13 @@ use Illuminate\Http\Request;
 class DriversController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $drivers = Driver::orderBy('name', 'desc')->orderBy('surname', 'desc')->paginate(10);
+        $drivers = Driver::all();
         return view('drivers.index', compact('drivers'));
     }
 
@@ -35,7 +25,7 @@ class DriversController extends Controller
      */
     public function create()
     {
-        return view ('drivers.create');
+        return view('drivers.create');
     }
 
     /**
@@ -46,15 +36,12 @@ class DriversController extends Controller
      */
     public function store(Request $request)
     {
-        Driver::create([
-            'name' => $request->input('name'),
-            'surname' => $request->input('surname'),
-            'city' => $request->input('city'), 
-            'creator_id' => \Auth::user()->id,
-            'updater_id' => \Auth::user()->id,       
-            ]);
-        return redirect('/drivers');
-    }
+        $driver = new Driver;
+        $driver->name = $request->input('name');
+        $driver->city = $request->input('city');
+        $driver->save();
+
+        return redirect('/drivers');    }
 
     /**
      * Display the specified resource.
@@ -75,7 +62,7 @@ class DriversController extends Controller
      */
     public function edit(Driver $driver)
     {
-        return view('drivers.edit', compact('driver'));
+        //
     }
 
     /**
@@ -87,12 +74,7 @@ class DriversController extends Controller
      */
     public function update(Request $request, Driver $driver)
     {
-        //$driver->update($request->all());
-        $driver->name = $request->input('name'); 
-        $driver->surname = $request->input('surname');
-        $driver->updater_id = \Auth::user()->id;
-        
-        return redirect('/drivers');
+        //
     }
 
     /**
@@ -103,8 +85,6 @@ class DriversController extends Controller
      */
     public function destroy(Driver $driver)
     {
-        $driver->delete();
-        
-        return redirect('/drivers');
+        //
     }
 }

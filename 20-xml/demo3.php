@@ -4,20 +4,21 @@ libxml_use_internal_errors(true);
 
 $doc = new DOMDocument();
 
-// $knygos = $doc->createElement('knygos');
-// $doc->appendChild($knygos);
+// $root = $doc->createElement('knygos');
+// $doc->appendChild($root);
 
 // $knyga1 = $doc->createElement('knyga');
-// $knygos->appendChild($knyga1);
+// $root->appendChild($knyga1);
 
 // $knyga2 = $doc->createElement('knyga');
-// $knygos->appendChild($knyga2);
+// $root->appendChild($knyga2);
 
 // $autorius = $doc->createElement('autorius');
 // $autorius_text = $doc->createTextNode('Jules Gabriel Verne');
 // $autorius->appendChild($autorius_text);
 // $autorius->setAttribute( "language", "fr" );
 // $knyga2->appendChild($autorius);
+// $knyga1->appendChild($autorius);
 
 $servername = 'localhost';
 $dbname = 'Auto';
@@ -32,7 +33,7 @@ if ($conn->connect_error) {
     die('Nepavyko prisjungti: ' . $conn->connect_error);
 }
 
-$sql = 'SELECT *, `distance`/`time`*3.6 as `speed` FROM radars ORDER BY number, date DESC';
+$sql = 'SELECT *, `distance`/`time`*3.6 as `speed` FROM radars ORDER BY number, date DESC LIMIT 1000';
 
 $result = $conn->query($sql);
 
@@ -48,6 +49,7 @@ if ($result->num_rows > 0) {
         $radar->appendChild(addXMLNode($doc, 'number', $row['number']));
         $radar->appendChild(addXMLNode($doc, 'distance', $row['distance']));
         $radar->appendChild(addXMLNode($doc, 'time', $row['time']));
+        $radar->appendChild(addXMLNode($doc, 'speed', $row['speed']));
         $radar->appendChild(addXMLNode($doc, 'driverId', $row['driverId']));
     }
 }

@@ -15,6 +15,7 @@ function lentele($conn) {
                 <th>Atstumas (m)</th>
                 <th>Laikas (s)</th>
                 <th>Greitis (km/h)</th>
+                <th></th>
             </tr>
         
             <?php while($row = $result->fetch_assoc()): ?>
@@ -24,6 +25,7 @@ function lentele($conn) {
                     <td><?php echo $row['distance']; ?></td>
                     <td><?php echo $row['time']; ?></td>
                     <td><?php echo round($row['speed'], 1); ?></td>
+                    <td><a href="?taisyti=<?php echo $row['id']; ?>">Taisyti</a></td>
                 </tr>
             <?php endwhile; ?>
         

@@ -20,11 +20,11 @@ if ($conn->connect_error) {
     die('Nepavyko prisjungti: ' . $conn->connect_error);
 }
 
-$page = 5;
+$page = 2;
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 }
-if ($page < 5) $page = 5;
+if ($page != 2) $page = 2;
 
 if (isset($_GET['offset'])) {
     $offset = $_GET['offset'];
@@ -34,7 +34,9 @@ if (isset($_GET['offset'])) {
 
 $sql = 'SELECT `number`, `distance`/`time`*3.6 as `speed`, `date` FROM radars ORDER BY `number`, `date` DESC LIMIT ' . ($page + 1) . ' OFFSET ' . $offset;
 
-$result = $conn->query($sql);
+if (!($result = $conn->query($sql))) {
+    die("Error: " . $conn->error);
+}
 
 if ($result->num_rows > 0) { 
     ?>
