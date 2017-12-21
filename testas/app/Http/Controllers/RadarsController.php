@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Radar;
+use Validator;
 
 class RadarsController extends Controller
 {
@@ -37,6 +38,30 @@ class RadarsController extends Controller
      */
     public function store(Request $request)
     {
+        // $this->validate($request, [
+        //     'date' => 'required | date',
+        //     'distance' => 'required | numeric',
+        //     'time' => 'required | numeric',
+        //     'number' => 'required | string | max:6 | min:1'
+        // ]);
+
+        $validator = Validator::make($request->all(), [
+            'date' => 'required | date',
+            'distance' => 'required | numeric',
+            'time' => 'required | numeric',
+            'number' => 'required | string | max:6 | min:1'
+        ]);
+            
+        $validator->after(function($validator) {
+            $data = $validator->getData();
+            $speed = $data['distance'] / $data['time'] * 3.6;
+            if ($speed < 50 || $speed > 300) {
+                $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
+            }
+        });
+        $validator->validate();
+        
+        
         $radar = new Radar;
         $radar->date = $request->input('date');
         $radar->number = $request->input('number');
@@ -78,6 +103,22 @@ class RadarsController extends Controller
      */
     public function update(Request $request, Radar $radar)
     {
+        $validator = Validator::make($request->all(), [
+            'date' => 'required | date',
+            'distance' => 'required | numeric',
+            'time' => 'required | numeric',
+            'number' => 'required | string | max:6 | min:1'
+        ]);
+            
+        $validator->after(function($validator) {
+            $data = $validator->getData();
+            $speed = $data['distance'] / $data['time'] * 3.6;
+            if ($speed < 50 || $speed > 300) {
+                $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
+            }
+        });
+        $validator->validate();
+        
         $radar->date = $request->input('date');
         $radar->number = $request->input('number');
         $radar->distance = $request->input('distance');

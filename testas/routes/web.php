@@ -16,8 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('radars', 'RadarsController@index');
+
 Route::get('radars/create', 'RadarsController@create');
 Route::post('radars', 'RadarsController@store');
+
 Route::get('radars/{radar}', 'RadarsController@show');
 Route::get('radars/{radar}/edit', 'RadarsController@edit');
 Route::put('radars/{radar}', 'RadarsController@update');

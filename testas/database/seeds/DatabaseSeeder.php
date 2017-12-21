@@ -12,27 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-
-        
-        \App\Radar::create([
-            'date' => Carbon::create(2017, 1, 1, 23, 25, 50),
-            'number' => 'AAA001',
-            'distance' => 1000,
-            'time' => 21
-        ]);
-        \App\Radar::create([
-            'date' => Carbon::create(2017, 1, 2, 0, 1, 59),
-            'number' => 'ABC222',
-            'distance' => 1000,
-            'time' => 20
-        ]);
-        \App\Radar::create([
-            'date' => Carbon::create(2017, 1, 2, 0, 3, 59),
-            'number' => 'ABB222',
-            'distance' => 1000,
-            'time' => 19
-        ]);
 
         \App\Driver::create([
             'name' => 'Jonas',
@@ -73,6 +52,10 @@ class DatabaseSeeder extends Seeder
             $radar->distance = $distance;
             $radar->time = $time;
             
+            if ($i % 50 == 0) {
+                $radar->driver_id = rand(1, 3);
+            }
+
             $radar->save();
         }
     }

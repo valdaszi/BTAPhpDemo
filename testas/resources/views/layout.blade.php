@@ -9,6 +9,10 @@
         <title>Radars</title>
     </head>
     <body>
-        @yield('content')
+        <div  class="container">
+            <div class="jumbotron">
+                @yield('content')
+            </div>
+        </div>
     </body>
 </html>
