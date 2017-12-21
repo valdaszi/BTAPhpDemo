@@ -20,10 +20,7 @@ class CreateRadarsTable extends Migration
             $table->double('distance');
             $table->double('time');
             $table->integer('driver_id')->nullable();
-            $table->integer('creator_id')->nullable();
-            $table->integer('updater_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
