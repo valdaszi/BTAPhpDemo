@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Radar;
 use Validator;
+use App\Http\Requests\RadarFormRequest;
 
 class RadarsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class RadarsController extends Controller
     public function index()
     {
         //$radars = Radar::all();
-        $radars = Radar::orderBy('date', 'desc')->paginate(15);
+        $radars = Radar::orderBy('date', 'desc')->paginate(10);
         return view('radars.index', compact('radars'));
     }
 
@@ -33,40 +39,34 @@ class RadarsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RadarFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RadarFormRequest $request)
     {
-        // $this->validate($request, [
+        // $validator = Validator::make($request->all(), [
         //     'date' => 'required | date',
         //     'distance' => 'required | numeric',
         //     'time' => 'required | numeric',
         //     'number' => 'required | string | max:6 | min:1'
         // ]);
-
-        $validator = Validator::make($request->all(), [
-            'date' => 'required | date',
-            'distance' => 'required | numeric',
-            'time' => 'required | numeric',
-            'number' => 'required | string | max:6 | min:1'
-        ]);
             
-        $validator->after(function($validator) {
-            $data = $validator->getData();
-            $speed = $data['distance'] / $data['time'] * 3.6;
-            if ($speed < 50 || $speed > 300) {
-                $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
-            }
-        });
-        $validator->validate();
-        
+        // $validator->after(function($validator) {
+        //     $data = $validator->getData();
+        //     $speed = $data['distance'] / $data['time'] * 3.6;
+        //     if ($speed < 50 || $speed > 300) {
+        //         $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
+        //     }
+        // });
+        // $validator->validate();
         
         $radar = new Radar;
         $radar->date = $request->input('date');
         $radar->number = $request->input('number');
         $radar->distance = $request->input('distance');
         $radar->time = $request->input('time');
+        $radar->creator_id = \Auth::user()->id;
+        $radar->updator_id = \Auth::user()->id;
         $radar->save();
 
         return redirect('/radars');
@@ -101,28 +101,29 @@ class RadarsController extends Controller
      * @param  Radar  $radar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Radar $radar)
+    public function update(RadarFormRequest $request, Radar $radar)
     {
-        $validator = Validator::make($request->all(), [
-            'date' => 'required | date',
-            'distance' => 'required | numeric',
-            'time' => 'required | numeric',
-            'number' => 'required | string | max:6 | min:1'
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'date' => 'required | date',
+        //     'distance' => 'required | numeric',
+        //     'time' => 'required | numeric',
+        //     'number' => 'required | string | max:6 | min:1'
+        // ]);
             
-        $validator->after(function($validator) {
-            $data = $validator->getData();
-            $speed = $data['distance'] / $data['time'] * 3.6;
-            if ($speed < 50 || $speed > 300) {
-                $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
-            }
-        });
-        $validator->validate();
-        
+        // $validator->after(function($validator) {
+        //     $data = $validator->getData();
+        //     $speed = $data['distance'] / $data['time'] * 3.6;
+        //     if ($speed < 50 || $speed > 300) {
+        //         $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
+        //     }
+        // });
+        // $validator->validate();
+
         $radar->date = $request->input('date');
         $radar->number = $request->input('number');
         $radar->distance = $request->input('distance');
         $radar->time = $request->input('time');
+        $radar->updator_id = \Auth::user()->id;
         $radar->save();
 
         return redirect('/radars');

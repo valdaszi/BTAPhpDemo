@@ -1,16 +1,17 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
-        <h1>Edit Radar</h1>
+    <div class="container">
+        <h1>{{ __('Edit Radar') }}</h1>
 
         <form method="post" action="{{ url('radars', $radar->id) }}">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
-            <input name="date" placeholder="date" value="{{ old('date', $radar->date) }}">
-            <input name="number" placeholder="number" value="{{ old('number', $radar->number) }}">
-            <input name="distance" placeholder="distance" value="{{ old('distance', $radar->distance) }}">
-            <input name="time" placeholder="time" value="{{ old('time', $radar->time) }}">
-            <button type="submit">Update</button>
+            <input name="date" placeholder="{{ __('Date') }}" value="{{ old('date', $radar->date) }}">
+            <input name="number" placeholder="{{ __('Number') }}" value="{{ old('number', $radar->number) }}">
+            <input name="distance" placeholder="{{ __('Distance') }}" value="{{ old('distance', $radar->distance) }}">
+            <input name="time" placeholder="{{ __('Time') }}" value="{{ old('time', $radar->time) }}">
+            <button type="submit">{{ __('Update') }}</button>
         </form>
 
         @if (count($errors))
@@ -19,6 +20,6 @@
             @endforeach
         @endif
 
-        <button onclick="window.history.back();">Go Back</button>
-
+        <button onclick="window.history.back();">{{ __('Go Back') }}</button>
+    </div>
 @endsection

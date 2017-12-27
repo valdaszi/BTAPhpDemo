@@ -1,6 +1,7 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
+    <div class="container">
         <h1>New Radar</h1>
 
         <form method="post" action="{{ url("radars") }}">
@@ -17,5 +18,5 @@
                 <div class="alert alert-danger" role="alert">{{ $error }}</div>
             @endforeach
         @endif
-
+    </div>
 @endsection

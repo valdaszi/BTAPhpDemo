@@ -1,0 +1,16 @@
+{
+    "Radars": "Radarai",
+    "Date": "Data",
+    "Number": "Numeris",
+    "Speed": "Greitis",
+    "Time": "Laikas",
+    "Distance": "Atstumas",
+    "Name": "Vardas",
+    "Creator": "Sukūrė",
+    "Updator": "Modifikavo",
+    "Created at": "Sukūrimo data",
+    "Updated at": "Modifikavimo data",
+    "Edit Radar": "Taisyti radarą",
+    "Update": "Atnaujinti",
+    "Go Back": "Atgal"
+}

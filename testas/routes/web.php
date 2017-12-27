@@ -36,3 +36,7 @@ Route::get('drivers/{driver}/edit', 'DriversController@edit');
 Route::put('drivers/{driver}', 'DriversController@update');
 Route::delete('drivers/{driver}', 'DriversController@destroy');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

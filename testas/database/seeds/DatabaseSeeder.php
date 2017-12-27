@@ -12,6 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        \App\User::create([
+            'email' => 'b@a.lt',
+            'name' => 'Ona Adminė',
+            'password' => bcrypt('456')
+        ]);
+
+        \App\User::create([
+            'email' => 'a@a.lt',
+            'name' => 'Petras Adminas',
+            'password' => bcrypt('123')
+        ]);
 
         \App\Driver::create([
             'name' => 'Jonas',
@@ -56,6 +67,9 @@ class DatabaseSeeder extends Seeder
                 $radar->driver_id = rand(1, 3);
             }
 
+            $radar->creator_id = 1;
+            $radar->updator_id = 1;
+            
             $radar->save();
         }
     }

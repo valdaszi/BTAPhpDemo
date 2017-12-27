@@ -1,6 +1,7 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
+    <div class="container">
         <h1>Drivers</h1>
         <table>
             <tr>
@@ -19,5 +20,5 @@
         <br>
         
         <a href={{ url('drivers/create') }}>Naujas</a>
-
+    </div>
 @endsection
