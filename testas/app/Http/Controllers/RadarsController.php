@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use App\Radar;
 use Validator;
 use App\Http\Requests\RadarFormRequest;
+use App\Repositories\RadarRepository;
 
 class RadarsController extends Controller
 {
-    public function __construct()
+    private $radarRepository;
+
+    public function __construct(RadarRepository $radarRepository)
     {
         $this->middleware('auth');
+        $this->radarRepository = $radarRepository;
     }
     
     /**
@@ -21,8 +25,7 @@ class RadarsController extends Controller
      */
     public function index()
     {
-        //$radars = Radar::all();
-        $radars = Radar::orderBy('date', 'desc')->paginate(10);
+        $radars = $this->radarRepository->list(10);
         return view('radars.index', compact('radars'));
     }
 
@@ -44,31 +47,7 @@ class RadarsController extends Controller
      */
     public function store(RadarFormRequest $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'date' => 'required | date',
-        //     'distance' => 'required | numeric',
-        //     'time' => 'required | numeric',
-        //     'number' => 'required | string | max:6 | min:1'
-        // ]);
-            
-        // $validator->after(function($validator) {
-        //     $data = $validator->getData();
-        //     $speed = $data['distance'] / $data['time'] * 3.6;
-        //     if ($speed < 50 || $speed > 300) {
-        //         $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
-        //     }
-        // });
-        // $validator->validate();
-        
-        $radar = new Radar;
-        $radar->date = $request->input('date');
-        $radar->number = $request->input('number');
-        $radar->distance = $request->input('distance');
-        $radar->time = $request->input('time');
-        $radar->creator_id = \Auth::user()->id;
-        $radar->updator_id = \Auth::user()->id;
-        $radar->save();
-
+        $this->radarRepository->save($request);
         return redirect('/radars');
     }
 
@@ -103,29 +82,7 @@ class RadarsController extends Controller
      */
     public function update(RadarFormRequest $request, Radar $radar)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'date' => 'required | date',
-        //     'distance' => 'required | numeric',
-        //     'time' => 'required | numeric',
-        //     'number' => 'required | string | max:6 | min:1'
-        // ]);
-            
-        // $validator->after(function($validator) {
-        //     $data = $validator->getData();
-        //     $speed = $data['distance'] / $data['time'] * 3.6;
-        //     if ($speed < 50 || $speed > 300) {
-        //         $validator->errors()->add('speed', 'Wrong speed: '.$speed.' km/h !');
-        //     }
-        // });
-        // $validator->validate();
-
-        $radar->date = $request->input('date');
-        $radar->number = $request->input('number');
-        $radar->distance = $request->input('distance');
-        $radar->time = $request->input('time');
-        $radar->updator_id = \Auth::user()->id;
-        $radar->save();
-
+        $this->radarRepository->update($request, $radar);
         return redirect('/radars');
     }
 
@@ -142,8 +99,7 @@ class RadarsController extends Controller
      */
     public function destroy(Radar $radar)
     {
-        $radar->delete();
-
+        $this->radarRepository->delete($radar);
         return redirect('/radars');        
     }
 }

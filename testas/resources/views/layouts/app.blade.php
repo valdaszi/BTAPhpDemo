@@ -66,7 +66,9 @@
                                 </ul>
                             </li>
                         @endguest
-                    </ul>
+                    <li><a href="{{ route('language', 'lt') }}">lt</a></li>
+                    <li><a href="{{ route('language', 'en') }}">en</a></li>
+                </ul>
                 </div>
             </div>
         </nav>

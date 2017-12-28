@@ -40,3 +40,5 @@ Route::delete('drivers/{driver}', 'DriversController@destroy');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/language/{language}', 'LanguageController@language')->name('language');
